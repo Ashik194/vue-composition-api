@@ -1,65 +1,20 @@
 <script setup>
-import axios from 'axios'
+import EventService from '@/services/EventService.js'
 import EventCard from '@/components/EventCard.vue'
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 
-const events = ref(
-    null
-//     [
-//   {
-//     id:1001,
-//     category:'food',
-//     title: 'Apple',
-//     description:"Apple is a delicious food",
-//     location:"Dhaka, Bangladesh",
-//     date: '17-11-2023',
-//     time: '8.40',
-//     storeAllowed:true,
-//     organizer:'Bangladesh'
-//   },
-//   {
-//     id:1002,
-//     category:'food',
-//     title: 'Banana',
-//     description:"Banana is a delicious food",
-//     location:"Dhaka, Bangladesh",
-//     date: '17-11-2023',
-//     time: '8.40',
-//     storeAllowed:true,
-//     organizer:'Bangladesh'
-//   },
-//   {
-//     id:1003,
-//     category:'food',
-//     title: 'Mango',
-//     description:"Mango is a delicious food",
-//     location:"Dhaka, Bangladesh",
-//     date: '17-11-2023',
-//     time: '8.40',
-//     storeAllowed:true,
-//     organizer:'Bangladesh'
-//   },
-//   {
-//     id:1004,
-//     category:'food',
-//     title: 'Lichi',
-//     description:"Lichi is a delicious food",
-//     location:"Dhaka, Bangladesh",
-//     date: '17-11-2023',
-//     time: '8.40',
-//     storeAllowed:true,
-//     organizer:'Bangladesh'
-//   },
-// ]
-)
+const events = ref(null)
 
-axios.get('https://my-json-server.typicode.com/Code-Pop/Real-World_vue-3/events')
-.then((response) => {
-    events.value = response.data
+onMounted(()=>{
+    EventService.getEvents()
+    .then((response) => {
+        events.value = response.data
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 })
-.catch((error) => {
-    console.log(error)
-})
+
 </script>
 
 <template>
