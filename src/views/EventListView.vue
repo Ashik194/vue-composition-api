@@ -23,7 +23,7 @@ onMounted(()=>{
   </div>
 </template>
 
-<style scoped>
+<style >
 .events{
   display: flex;
   flex-direction: column;
